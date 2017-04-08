@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Cloud Chat</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="send_button_label">Send</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="unsubscribe">Unsubscribe</string>
+
+</resources>
