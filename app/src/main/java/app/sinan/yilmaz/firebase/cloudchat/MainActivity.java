@@ -87,16 +87,6 @@ public class MainActivity extends AppCompatActivity {
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
 
-    /*    if (getIntent().getExtras() != null) {
-            for (String key : getIntent().getExtras().keySet()) {
-                if (key.equals("title")) {
-                    dataTitle = (String) getIntent().getExtras().get(key);
-                }
-                if (key.equals("message")) {
-                    dataMessage = (String) getIntent().getExtras().get(key);
-                }
-            }
-        }*/
 
         // Initialize message ListView and its adapter
         List<Message> messages = new ArrayList<>();
@@ -108,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
         // ImagePickerButton shows an image picker to upload a image for a message
         mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
-                // TODO: Fire an intent to show an image picker
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -189,15 +178,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
+            //Click Subscribe utton
             case R.id.subscribe:
                 FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
                 Toast.makeText(MainActivity.this, "Subscribed to Topic: Push Notifications", Toast.LENGTH_SHORT).show();
                 break;
+            //Click Unsubscribe button
             case R.id.unsubscribe:
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("pushNotifications");
                 Toast.makeText(MainActivity.this, "Unsubscribed to Topic: Push Notifications", Toast.LENGTH_SHORT).show();
                 break;
+            //Click signout button
             case R.id.sign_out_menu:
                 AuthUI.getInstance().signOut(this);
                 break;
@@ -231,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
             Uri selectedImageUri = data.getData();
             StorageReference photoRef =
                     mChatPhotosStorageRef.child(selectedImageUri.getLastPathSegment());
-
+      //upload a photo Storage
             photoRef.putFile(selectedImageUri)
                     .addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
